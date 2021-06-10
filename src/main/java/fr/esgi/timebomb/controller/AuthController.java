@@ -22,7 +22,8 @@ public class AuthController {
     private final TokenProvider tokenProvider;
     private final AuthenticationManagerBuilder authenticationManager;
 
-    public AuthController(TokenProvider tokenProvider, AuthenticationManagerBuilder authenticationManager) {
+    public AuthController(TokenProvider tokenProvider,
+                          AuthenticationManagerBuilder authenticationManager) {
         this.tokenProvider = tokenProvider;
         this.authenticationManager = authenticationManager;
     }

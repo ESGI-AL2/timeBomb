@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface PlayerDao extends JpaRepository<Player, Integer> {
-
+public interface AccountRepository  extends JpaRepository<Player, Integer> {
     Optional<Player> findPlayerByUsername(String username);
 }

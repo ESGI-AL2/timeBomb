@@ -4,27 +4,25 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Data
-@AllArgsConstructor
+@Accessors(chain = true)
 public class Player {
-
     @Id
     @GeneratedValue
-    private int id;
+    private Long id;
     private String username;
+
     private String password;
-
-    public Player() {
-
-    }
-//    private List<Card> cards;
+    @ElementCollection
+    @CollectionTable(name="roles")
+    private List<String> roles = new ArrayList<String>();
 
 }
+
+
+

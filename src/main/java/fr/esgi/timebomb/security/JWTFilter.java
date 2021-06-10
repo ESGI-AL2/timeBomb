@@ -14,12 +14,11 @@ import java.io.IOException;
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 import static org.springframework.util.StringUtils.hasText;
 
-public class JWFilter extends GenericFilterBean {
-
+public class JWTFilter extends GenericFilterBean {
 
     private final TokenProvider tokenProvider;
 
-    public JWFilter(TokenProvider tokenProvider) {
+    public JWTFilter(TokenProvider tokenProvider) {
         this.tokenProvider = tokenProvider;
     }
 
@@ -45,5 +44,4 @@ public class JWFilter extends GenericFilterBean {
         }
         return null;
     }
-
 }
