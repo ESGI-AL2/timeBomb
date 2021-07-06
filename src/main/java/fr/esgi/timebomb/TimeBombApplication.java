@@ -17,7 +17,7 @@ public class TimeBombApplication {
     @Autowired
     private CardDao cardRepository;
 
-    @PostConstruct
+/*    @PostConstruct
     public void initCard(){
         List<Card> cards = Stream.of(
                 new Card(Card.Value.BOMB),
@@ -25,7 +25,7 @@ public class TimeBombApplication {
                 new Card(Card.Value.COLOR)
         ).collect(Collectors.toList());
         cardRepository.saveAll(cards);
-    }
+    }*/
 
     public static void main(String[] args) {
         SpringApplication.run(TimeBombApplication.class, args);

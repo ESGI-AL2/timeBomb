@@ -1,5 +1,6 @@
 package fr.esgi.timebomb;
 
+import fr.esgi.timebomb.domain.Role;
 import fr.esgi.timebomb.security.JWTFilter;
 import fr.esgi.timebomb.security.TokenProvider;
 import org.springframework.context.annotation.Bean;
@@ -26,16 +27,13 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
             .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
+            .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            .and()
             .csrf().disable()
             .authorizeRequests()
-                .antMatchers("/login").permitAll()
-                .antMatchers("/api/**").hasRole("USER")
-                .antMatchers("/admin/**").hasRole("ADMIN")
-            .anyRequest()
-                .authenticated()
-                .and()
+            .antMatchers("/auth/**").permitAll()
+            .antMatchers("/**").authenticated()
+            .and()
             .addFilterBefore(new JWTFilter(tokenProvider), UsernamePasswordAuthenticationFilter.class);
     }
 

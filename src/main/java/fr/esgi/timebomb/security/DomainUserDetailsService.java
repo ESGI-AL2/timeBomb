@@ -26,7 +26,7 @@ public class DomainUserDetailsService implements UserDetailsService {
         return User.builder()
                 .username(username)
                 .password(appUser.getPassword())
-                .roles(appUser.getRoles().toArray(new String[0]))
+                .roles(appUser.getRoles().name())
                 .accountExpired(false)
                 .accountLocked(false)
                 .credentialsExpired(false)
