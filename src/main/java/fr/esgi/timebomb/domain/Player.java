@@ -4,27 +4,46 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Data
-@AllArgsConstructor
+@Accessors(chain = true)
 public class Player {
-
     @Id
     @GeneratedValue
-    private int id;
+    private Long id;
+    @Column(unique = true)
     private String username;
     private String password;
+    @Enumerated(EnumType.STRING)
+    private Role roles;
+    @ManyToMany(cascade=CascadeType.ALL)
+    private List<Card> cards;
+
+    public Player(String username, String password, Role roles, List<Card> cards) {
+        this.username = username;
+        this.password = password;
+        this.roles = roles;
+        this.cards = cards;
+    }
+    public Player(String username, String password, Role roles) {
+        this.username = username;
+        this.password = password;
+        this.roles = roles;
+    }
+
 
     public Player() {
 
     }
-//    private List<Card> cards;
 
+    public void setCards(List<Card> cards) {
+        this.cards = cards;
+    }
 }
+
+
+

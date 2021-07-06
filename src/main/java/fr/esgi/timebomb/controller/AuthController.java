@@ -1,42 +1,41 @@
 package fr.esgi.timebomb.controller;
 
+import fr.esgi.timebomb.authentification.Login;
+//import fr.esgi.timebomb.authentification.Register;
+import fr.esgi.timebomb.authentification.Register;
 import fr.esgi.timebomb.dto.LoginDTO;
-import fr.esgi.timebomb.security.TokenProvider;
+import fr.esgi.timebomb.dto.RegisterDTO;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import static org.springframework.http.HttpHeaders.AUTHORIZATION;
+import java.net.URI;
 
 @RestController
-@RequestMapping("/login")
+@RequestMapping("/auth")
 public class AuthController {
 
-    private final TokenProvider tokenProvider;
-    private final AuthenticationManagerBuilder authenticationManager;
+    private final Register register;
+    private final Login login;
 
-    public AuthController(TokenProvider tokenProvider, AuthenticationManagerBuilder authenticationManager) {
-        this.tokenProvider = tokenProvider;
-        this.authenticationManager = authenticationManager;
+    public AuthController(Register register, Login login) {
+        this.register = register;
+        this.login = login;
     }
 
-    @PostMapping
-    public ResponseEntity login(@RequestBody LoginDTO loginDTO) {
-        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(loginDTO.getUsername(), loginDTO.getPassword());
+    @PostMapping("/register")
+    public ResponseEntity<?> register(@RequestBody RegisterDTO registerDTO){
+        URI uri = register.execute(registerDTO);
+        return ResponseEntity.created(uri).build();
+    }
 
-        Authentication authentication = authenticationManager.getObject().authenticate(authenticationToken);
-
-        String token = tokenProvider.createToken(authentication);
-        HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.add(AUTHORIZATION, "Bearer " + token);
-
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody LoginDTO loginDTO) {
+        HttpHeaders httpHeaders = login.execute(loginDTO);
         return new ResponseEntity<>(httpHeaders, HttpStatus.OK);
     }
 }
