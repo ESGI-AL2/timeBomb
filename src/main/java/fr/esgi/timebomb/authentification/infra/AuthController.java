@@ -1,10 +1,10 @@
-package fr.esgi.timebomb.controller;
+package fr.esgi.timebomb.authentification.infra;
 
-import fr.esgi.timebomb.authentification.Login;
-//import fr.esgi.timebomb.authentification.Register;
-import fr.esgi.timebomb.authentification.Register;
-import fr.esgi.timebomb.dto.LoginDTO;
-import fr.esgi.timebomb.dto.RegisterDTO;
+import fr.esgi.timebomb.authentification.app.Login;
+//import fr.esgi.timebomb.authentification.app.Register;
+import fr.esgi.timebomb.authentification.app.Register;
+import fr.esgi.timebomb.authentification.app.dto.LoginDTO;
+import fr.esgi.timebomb.authentification.app.dto.RegisterDTO;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,7 +1,8 @@
-package fr.esgi.timebomb.security;
+package fr.esgi.timebomb.authentification.infra.configuration;
 
-import fr.esgi.timebomb.domain.Player;
-import fr.esgi.timebomb.dao.AccountRepository;
+import fr.esgi.timebomb.authentification.domain.Account;
+import fr.esgi.timebomb.authentification.domain.AccountRepository;
+import fr.esgi.timebomb.repository.PlayerRepository;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,21 +13,21 @@ import org.springframework.stereotype.Component;
 @Component
 public class DomainUserDetailsService implements UserDetailsService {
 
-    private final AccountRepository userRepository;
+    private final AccountRepository accountRepository;
 
-    public DomainUserDetailsService(AccountRepository userRepository) {
-        this.userRepository = userRepository;
+    public DomainUserDetailsService(AccountRepository accountRepository) {
+        this.accountRepository = accountRepository;
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Player appUser = userRepository.findPlayerByUsername(username)
+        Account account = accountRepository.findPlayerByUsername(username)
                 .orElseThrow(() -> new AuthenticationServiceException("username " + username + " not found"));
 
         return User.builder()
                 .username(username)
-                .password(appUser.getPassword())
-                .roles(appUser.getRoles().name())
+                .password(account.getPassword())
+                .roles(account.getRole().name())
                 .accountExpired(false)
                 .accountLocked(false)
                 .credentialsExpired(false)

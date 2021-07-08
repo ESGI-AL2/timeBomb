@@ -1,6 +1,6 @@
-package fr.esgi.timebomb.dto;
+package fr.esgi.timebomb.authentification.app.dto;
 
-import fr.esgi.timebomb.domain.Role;
+import fr.esgi.timebomb.authentification.domain.Role;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
