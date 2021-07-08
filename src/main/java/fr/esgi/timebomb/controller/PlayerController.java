@@ -1,7 +1,7 @@
 package fr.esgi.timebomb.controller;
 
-import fr.esgi.timebomb.dao.AccountRepository;
 import fr.esgi.timebomb.domain.Player;
+import fr.esgi.timebomb.repository.PlayerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +17,7 @@ import static org.springframework.http.ResponseEntity.ok;
 public class PlayerController {
 
     @Autowired
-    private AccountRepository playerDao;
+    private PlayerRepository playerDao;
 
     @GetMapping
     public ResponseEntity<List<Player>> listPlayer(){

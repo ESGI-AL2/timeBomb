@@ -1,21 +1,15 @@
 package fr.esgi.timebomb;
 
-import fr.esgi.timebomb.dao.CardDao;
-import fr.esgi.timebomb.domain.Card;
+import fr.esgi.timebomb.repository.CardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import javax.annotation.PostConstruct;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @SpringBootApplication
 public class TimeBombApplication {
 
     @Autowired
-    private CardDao cardRepository;
+    private CardRepository cardRepository;
 
 /*    @PostConstruct
     public void initCard(){

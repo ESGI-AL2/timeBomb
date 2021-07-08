@@ -1,16 +1,16 @@
 package fr.esgi.timebomb.domain;
 
-import lombok.AllArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Data
 @Accessors(chain = true)
+@JsonIgnoreProperties("cards")
 public class Player {
     @Id
     @GeneratedValue
@@ -20,7 +20,7 @@ public class Player {
     private String password;
     @Enumerated(EnumType.STRING)
     private Role roles;
-    @ManyToMany(cascade=CascadeType.ALL)
+    @OneToMany(mappedBy = "player")
     private List<Card> cards;
 
     public Player(String username, String password, Role roles, List<Card> cards) {
@@ -36,7 +36,11 @@ public class Player {
     }
 
 
-    public Player() {
+    public Player(String username) {
+        this.username = username;
+    }
+
+    public Player (){
 
     }
 

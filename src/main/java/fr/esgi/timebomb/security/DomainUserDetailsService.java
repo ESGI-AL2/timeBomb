@@ -1,7 +1,7 @@
 package fr.esgi.timebomb.security;
 
 import fr.esgi.timebomb.domain.Player;
-import fr.esgi.timebomb.dao.AccountRepository;
+import fr.esgi.timebomb.repository.PlayerRepository;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,9 +12,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class DomainUserDetailsService implements UserDetailsService {
 
-    private final AccountRepository userRepository;
+    private final PlayerRepository userRepository;
 
-    public DomainUserDetailsService(AccountRepository userRepository) {
+    public DomainUserDetailsService(PlayerRepository userRepository) {
         this.userRepository = userRepository;
     }
 

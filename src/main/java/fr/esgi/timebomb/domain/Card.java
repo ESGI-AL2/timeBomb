@@ -3,18 +3,24 @@ package fr.esgi.timebomb.domain;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+
 
 @Entity
 @Data
 @Accessors(chain = true)
 public class Card {
 
+    public Card(Value value, Player player) {
+
+        this.value = value;
+        this.player = player;
+    }
+
     public Card() {
 
     }
+
 
     public enum Value {
         COLOR, ORDINARY, BOMB
@@ -25,7 +31,9 @@ public class Card {
     private int id;
     private Value value;
 
-    public Card(Value value) {
-        this.value = value;
-    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn (name="playerid",referencedColumnName="id",nullable=true,unique=false)
+    private Player player;
+
 }
