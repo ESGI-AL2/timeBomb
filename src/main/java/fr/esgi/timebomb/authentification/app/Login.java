@@ -1,8 +1,8 @@
-package fr.esgi.timebomb.authentification;
+package fr.esgi.timebomb.authentification.app;
 
-import fr.esgi.timebomb.domain.Player;
-import fr.esgi.timebomb.dto.LoginDTO;
-import fr.esgi.timebomb.security.TokenProvider;
+import fr.esgi.timebomb.authentification.FindAccountByUsername;
+import fr.esgi.timebomb.authentification.app.dto.LoginDTO;
+import fr.esgi.timebomb.authentification.infra.configuration.TokenProvider;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -27,8 +27,6 @@ public class Login {
     public HttpHeaders execute(LoginDTO loginDTO) {
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(loginDTO.getUsername(), loginDTO.getPassword());
-
-        Player account = findAccountByUsername.execute(loginDTO.getUsername());
 
         Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
 

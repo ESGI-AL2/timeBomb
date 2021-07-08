@@ -1,12 +1,8 @@
-package fr.esgi.timebomb;
+package fr.esgi.timebomb.authentification.infra.configuration;
 
-import fr.esgi.timebomb.domain.Role;
-import fr.esgi.timebomb.security.JWTFilter;
-import fr.esgi.timebomb.security.TokenProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

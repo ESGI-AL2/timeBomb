@@ -1,21 +1,21 @@
 package fr.esgi.timebomb.authentification;
 
-import fr.esgi.timebomb.domain.Player;
-import fr.esgi.timebomb.repository.PlayerRepository;
+import fr.esgi.timebomb.authentification.domain.Account;
+import fr.esgi.timebomb.authentification.domain.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class AddAccount {
 
-    private final PlayerRepository accountDao;
+    private final AccountRepository accountRepository;
 
     @Autowired
-    public AddAccount(PlayerRepository accountDao) {
-        this.accountDao = accountDao;
+    public AddAccount(AccountRepository accountRepository) {
+        this.accountRepository = accountRepository;
     }
 
-    public Player execute(Player account) {
-        return accountDao.save(account);
+    public Account execute(Account account) {
+        return accountRepository.save(account);
     }
 }

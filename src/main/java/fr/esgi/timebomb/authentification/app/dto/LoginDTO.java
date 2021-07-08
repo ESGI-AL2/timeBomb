@@ -1,4 +1,4 @@
-package fr.esgi.timebomb.dto;
+package fr.esgi.timebomb.authentification.app.dto;
 
 import lombok.Data;
 

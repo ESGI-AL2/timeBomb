@@ -1,4 +1,4 @@
-package fr.esgi.timebomb.authentification;
+package fr.esgi.timebomb.exceptions;
 
 import lombok.extern.slf4j.Slf4j;
 

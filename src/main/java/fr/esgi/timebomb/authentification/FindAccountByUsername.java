@@ -1,21 +1,22 @@
 package fr.esgi.timebomb.authentification;
 
 
-import fr.esgi.timebomb.domain.Player;
-import fr.esgi.timebomb.repository.PlayerRepository;
+import fr.esgi.timebomb.authentification.domain.Account;
+import fr.esgi.timebomb.authentification.domain.AccountRepository;
+import fr.esgi.timebomb.exceptions.AccountWithUsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
 public class FindAccountByUsername {
 
-    private final PlayerRepository accountDao;
+    private final AccountRepository accountRepository;
 
-    public FindAccountByUsername(PlayerRepository accountDao) {
-        this.accountDao = accountDao;
+    public FindAccountByUsername(AccountRepository accountRepository) {
+        this.accountRepository = accountRepository;
     }
 
-    public Player execute(String username){
-        return accountDao.findPlayerByUsername(username)
+    public Account execute(String username){
+        return accountRepository.findPlayerByUsername(username)
                 .orElseThrow(() -> new AccountWithUsernameNotFoundException(username));
     }
 }

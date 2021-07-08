@@ -1,6 +1,5 @@
 package fr.esgi.timebomb.exceptions;
 
-import fr.esgi.timebomb.authentification.AccountWithUsernameNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpHeaders;

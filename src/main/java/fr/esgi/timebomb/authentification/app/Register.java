@@ -1,8 +1,9 @@
-package fr.esgi.timebomb.authentification;
+package fr.esgi.timebomb.authentification.app;
 
 
-import fr.esgi.timebomb.domain.Player;
-import fr.esgi.timebomb.dto.RegisterDTO;
+import fr.esgi.timebomb.authentification.AddAccount;
+import fr.esgi.timebomb.authentification.app.dto.RegisterDTO;
+import fr.esgi.timebomb.authentification.domain.Account;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -25,8 +26,8 @@ public class Register {
     }
 
     public URI execute(RegisterDTO registerDTO) {
-        Player account = new Player(registerDTO.getUsername(), passwordEncoder.encode(registerDTO.getPassword()), registerDTO.getRole());
-        long id = addAccount.execute(account).getId();
+        Account account = new Account(registerDTO.getUsername(), passwordEncoder.encode(registerDTO.getPassword()), registerDTO.getRole());
+        String id = addAccount.execute(account).getId();
         return ServletUriComponentsBuilder.fromPath("/api/users").path("/{id}").buildAndExpand(id).toUri();
     }
 }
