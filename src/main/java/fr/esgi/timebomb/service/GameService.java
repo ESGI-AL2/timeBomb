@@ -3,7 +3,7 @@ package fr.esgi.timebomb.service;
 
 import fr.esgi.timebomb.domain.Card;
 import fr.esgi.timebomb.domain.Game;
-import fr.esgi.timebomb.domain.GameDTO;
+import fr.esgi.timebomb.dto.GameDTO;
 import fr.esgi.timebomb.domain.Player;
 import fr.esgi.timebomb.repository.GameRepository;
 import lombok.Data;

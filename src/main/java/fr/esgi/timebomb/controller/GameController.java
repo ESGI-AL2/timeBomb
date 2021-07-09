@@ -2,7 +2,7 @@ package fr.esgi.timebomb.controller;
 
 
 import fr.esgi.timebomb.domain.Game;
-import fr.esgi.timebomb.domain.GameDTO;
+import fr.esgi.timebomb.dto.GameDTO;
 import fr.esgi.timebomb.exceptions.GameEmptyException;
 import fr.esgi.timebomb.service.CardService;
 import fr.esgi.timebomb.service.GameService;
