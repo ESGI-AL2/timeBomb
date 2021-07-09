@@ -14,7 +14,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.util.Optional;
 @RestController
-@RequestMapping("/api/games")
+@RequestMapping("/games")
 public class GameController {
     @Autowired
     private GameService gameService;

@@ -16,7 +16,7 @@ import java.util.Optional;
 import java.util.Random;
 
 @RestController
-@RequestMapping("/api/cards")
+@RequestMapping("/cards")
 public class CardController {
 
     @Autowired
