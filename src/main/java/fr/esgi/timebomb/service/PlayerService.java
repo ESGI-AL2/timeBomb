@@ -1,11 +1,13 @@
 package fr.esgi.timebomb.service;
 
+
 import fr.esgi.timebomb.domain.Player;
 import fr.esgi.timebomb.repository.PlayerRepository;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Data
@@ -14,7 +16,7 @@ public class PlayerService {
     @Autowired
     private PlayerRepository playerRepository;
 
-    public Optional<Player> getPlayer(final Long id) {
+    public Optional<Player> getPlayer(final int id) {
         return playerRepository.findById(id);
     }
 
@@ -24,6 +26,9 @@ public class PlayerService {
 
     public Player savePlayer(Player player) {Player savedPlayer = playerRepository.save(player);
         return savedPlayer;
+    }
+    public List<Player> getPlayersByGameId (int gameId) {
+        return playerRepository.getPlayersByGameId(gameId);
     }
 
 }

@@ -1,14 +1,15 @@
 package fr.esgi.timebomb.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
-import lombok.experimental.Accessors;
+
 
 import javax.persistence.*;
 
 
 @Entity
 @Data
-@Accessors(chain = true)
+@JsonIgnoreProperties("player")
 public class Card {
 
     public Card(Value value, Player player) {
@@ -19,6 +20,9 @@ public class Card {
 
     public Card() {
 
+    }
+    public Card (Value value) {
+        this.value = value;
     }
 
 

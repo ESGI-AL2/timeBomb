@@ -1,12 +1,10 @@
 package fr.esgi.timebomb.controller;
 
+
 import fr.esgi.timebomb.domain.Card;
 import fr.esgi.timebomb.domain.Player;
 import fr.esgi.timebomb.exceptions.CardEmptyException;
-import fr.esgi.timebomb.exceptions.ResourceWithIdIntNotFoundException;
-import fr.esgi.timebomb.exceptions.ResourceWithIdNotFoundException;
 import fr.esgi.timebomb.service.CardService;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,9 +15,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
-@Slf4j
 @RestController
-@RequestMapping("cards")
+@RequestMapping("/api/cards")
 public class CardController {
 
     @Autowired
@@ -36,6 +33,11 @@ public class CardController {
         return cardService.getCardsByPlayerId(playerId);
     }
 
+    @GetMapping("/gameid/{id}")
+    public List<Card> getCardsByGameId (@PathVariable("id") int gameId) {
+        return cardService.getCardsByGameId(gameId);
+    }
+
     @PostMapping
     public ResponseEntity<?> createCard(@RequestBody Card card) throws CardEmptyException {
         if (card.getValue() == null) {
@@ -48,7 +50,7 @@ public class CardController {
                 .path("/{id}")
                 .buildAndExpand(created.getId())
                 .toUri();
-        return ResponseEntity.created(location).build();
+        return ResponseEntity.created(location).body(created);
 
     }
 
@@ -67,8 +69,11 @@ public class CardController {
         Optional<Card> c = cardService.getCard(id);
         if(c.isPresent()) {
             Card currentCard = c.get();
+
+
             Player player = card.getPlayer();
             currentCard.setPlayer(player);
+
             return currentCard;
         } else {
             return null;
@@ -76,19 +81,13 @@ public class CardController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteCard(@PathVariable("id") final int id) throws ResourceWithIdIntNotFoundException {
+    public void deleteCard(@PathVariable("id") final int id) {
         cardService.deleteCard (id);
-
-        return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("playerid/{id}/randomdelete")
     public Card randomDeleteCardFromPlayer (@PathVariable("id") final int id) {
-        List<Card> cards = cardService.getCardsByPlayerId(id);
-        Random randomizer = new Random();
-        Card deleteCard = cards.get(randomizer.nextInt(cards.size()));
-        cardService.deleteCard( deleteCard.getId());
-        return deleteCard;
+        return cardService.randomDeleteCardFromPlayer(id);
     }
 
 
