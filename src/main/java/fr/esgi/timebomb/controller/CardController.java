@@ -3,7 +3,10 @@ package fr.esgi.timebomb.controller;
 import fr.esgi.timebomb.domain.Card;
 import fr.esgi.timebomb.domain.Player;
 import fr.esgi.timebomb.exceptions.CardEmptyException;
+import fr.esgi.timebomb.exceptions.ResourceWithIdIntNotFoundException;
+import fr.esgi.timebomb.exceptions.ResourceWithIdNotFoundException;
 import fr.esgi.timebomb.service.CardService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +17,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
-
+@Slf4j
 @RestController
 @RequestMapping("cards")
 public class CardController {
@@ -73,8 +76,10 @@ public class CardController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteCard(@PathVariable("id") final int id) {
+    public ResponseEntity<?> deleteCard(@PathVariable("id") final int id) throws ResourceWithIdIntNotFoundException {
         cardService.deleteCard (id);
+
+        return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("playerid/{id}/randomdelete")

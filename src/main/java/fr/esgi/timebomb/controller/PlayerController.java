@@ -2,6 +2,7 @@ package fr.esgi.timebomb.controller;
 
 import fr.esgi.timebomb.domain.Player;
 import fr.esgi.timebomb.exceptions.PlayerEmptyException;
+import fr.esgi.timebomb.exceptions.ResourceWithIdNotFoundException;
 import fr.esgi.timebomb.repository.PlayerRepository;
 import fr.esgi.timebomb.service.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,12 +43,12 @@ public class PlayerController {
     }
 
     @GetMapping("/{id}")
-    public Player getPlayer(@PathVariable("id") final Long id) {
+    public Player getPlayer(@PathVariable("id") final Long id) throws ResourceWithIdNotFoundException {
         Optional<Player> player = playerService.getPlayer(id);
         if(player.isPresent()) {
             return player.get();
         } else {
-            return null;
+            throw new ResourceWithIdNotFoundException("Resource not found", id.toString());
         }
     }
 }
