@@ -2,9 +2,9 @@ name: Java CI with Maven
  
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
  
 jobs:
   build:
@@ -27,5 +27,5 @@ jobs:
         application_name: Timebomb
         environment_name: Timebomb
         version_label: ${{github.SHA}}
-        region: us-east-1
-        deployment_package: target/spring-petclinic-rest-2.2.5.jar
+        region: ${{ secrets.AWS_REGION }}
+        deployment_package: target/timeBomb-0.0.1-SNAPSHOT.jar
